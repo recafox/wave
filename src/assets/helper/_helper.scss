@@ -1,0 +1,200 @@
+.border-white{
+    border:2px solid white;
+}
+
+.text-white{
+    color: $white;
+}
+.text-black{
+    color:$black;
+}
+.text-gray{
+    color:$gray-600;
+}
+
+.bg-black{
+    background-color: $black;
+}
+.bg-gray-300{
+    background-color: $gray-300;
+}
+
+.mt-10{
+    margin-top: 10rem;
+}
+.font-l{
+    font-size: 3rem !important;
+}
+
+.font-m{
+    font-size: 1.5rem !important;
+}
+
+.font-s{
+    font-size: 0.7rem !important;
+}
+
+.top-0{
+    top:0
+}
+
+.bottom-0{
+    bottom:0;
+}
+
+.right-0{
+    right:0;
+}
+
+.left-0{
+    left:0;
+}
+
+.btn-border-info{
+    @include borderBtn($info);
+}
+.btn-border-white{
+    @include borderBtn($white);
+}
+.btn-border-warning{
+    @include borderBtn($warning);
+}  
+.btn-border-primary{
+    @include borderBtn($primary);
+}
+.btn-border-danger{
+    @include borderBtn($danger);
+}
+.btn-border-secondary{
+    @include borderBtn($secondary);
+}
+.btn-border-success{
+    @include borderBtn($success);
+}
+
+.btn-neon-warning{
+    @include neonBtn($warning);
+}
+.btn-neon-primary{
+    @include neonBtn($primary);
+}
+.btn-neon-secondary{
+    @include neonBtn($secondary);
+}
+.btn-neon-info{
+    @include neonBtn($info);
+}
+.btn-neon-success{
+    @include neonBtn($success);
+}
+.btn-neon-primary.active{
+    cursor:pointer !important;
+    transition:0.1s !important;
+    background-color: $primary !important;
+    box-shadow: 0 0 10px $primary!important;
+    color:$white !important;
+}
+
+.td-flex-center{
+    display:flex;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.list-table{
+    p{
+        margin-bottom:0px !important;
+    }
+    th{
+        padding:0.3rem !important;
+    }
+    td{
+        padding:0.3rem !important;
+        vertical-align: middle !important;
+    }
+}
+
+.justify-content-around{
+    justify-content: around;
+}
+
+.img-shadow{
+    border-radius: 50%;
+		box-shadow: -13px 7px 2px rgba(50, 193, 139,0.6),-10px -6px 2px rgba(213, 55, 225,0.6) ;
+		&:hover{
+			animation:wobble 1.5s ease-in infinite;
+		}
+}
+.img-shadow.active{
+	animation:wobble 1.5s ease-in infinite;
+}
+
+@keyframes wobble{
+	33%{
+		box-shadow: 0px -7px 2px rgba(50, 193, 139,0.6),0px 6px 2px rgba(213, 55, 225,0.6) ;
+	}	
+	66%{
+		box-shadow: 13px 7px 2px rgba(50, 193, 139,0.6),14px 0px 2px rgba(213, 55, 225,0.6) ;
+	}
+	100%{
+		box-shadow: -13px 7px 2px rgba(50, 193, 139,0.6),-10px -6px 2px rgba(213, 55, 225,0.6) ;
+	}					
+}
+
+.text-line-through{
+    text-decoration: line-through;
+}
+
+.icon-l{
+    transform: scale(1.7);
+}
+.icon-m{
+    transform: scale(1.3);
+}
+
+.img-responsive{
+    @include sizing(150px);
+    @include mobile{
+        @include sizing(100px);
+    }
+}
+
+.caret-white{
+    caret-color: white;
+}
+
+.btn-fixed-position-responsive{
+    @include pad{
+        top:75%;
+    }
+    @include mobile{
+        transform:scale(0.7);
+        top: 85%;
+    }
+}
+
+.product-card{
+	background:rgba(73, 80, 87,0.3);
+	padding:1rem 0;
+	display:inline-flex;
+	flex-direction: column;
+	align-items: center;
+	height:500px;
+	img{
+			width:60%;
+	}
+	&:hover{
+		background:rgba(255, 255, 255, 0.2);
+		.img-shadow{
+			animation:wobble 1.5s ease-in-out infinite;
+		}
+	}   
+}
+
+.title-neon{
+	font-family: 'Noto Sans TC';
+	font-size: 2rem;
+	text-shadow: 0 0 10px purple, 0 0 15px white;
+	color: violet;
+}

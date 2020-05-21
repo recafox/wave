@@ -1,0 +1,77 @@
+@import '../assets/all.scss';
+
+.product-img{
+    @include sizing(150px);
+
+    @include mobile{
+        @include sizing(100px);
+    }
+}
+
+.add-btn{
+    @include sizing(100px);
+    @include mobile{
+        transform:scale(0.7);
+        right: 0;
+        top: 85%;
+    }
+    background:white;
+    position: fixed;
+    z-index: 5;
+    top:80%;
+    right:3%;
+    border-radius: 50%;
+    transition:0.3s;
+    &:hover{
+        cursor: pointer;
+        transition:0.1s;
+        background-color: $primary;
+        &::before, &::after{
+            background-color: white;
+        }
+        &::before{
+            transform:rotate(135deg);   
+        }
+        &::after{
+            top:45%;
+            left:25%;
+            transform:rotate(45deg);
+        }
+    }
+    &::before, &::after{
+        content:"";
+        display: block;
+        background: black;
+        height:10px;
+        width:50%;
+        transform: translateX(-50%) translateY(-50%);
+        position:absolute;
+
+    }
+    &::before{
+        top:45%;
+        left:25%;
+        transform:rotate(90deg);
+        
+    }
+    &::after{
+        top:50%;
+        left:50%;
+        
+    }
+}
+
+.add-btn.active{
+    background-color: $primary;
+    &::before, &::after{
+        background-color: white;
+    }
+    &::before{
+        transform:rotate(135deg);   
+    }
+    &::after{
+        top:45%;
+        left:25%;
+        transform:rotate(45deg);
+    }
+}

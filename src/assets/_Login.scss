@@ -1,0 +1,59 @@
+@import '../assets/all.scss';
+
+
+html, body{
+    height:100%;
+    margin:0px;
+}
+
+.outer-container{
+    position: absolute;
+    top:0;
+    width:100%;
+    height:100%;
+    transition:0.7s;
+    .homepage-btn{
+        position: absolute;
+        top:3%;
+        left:2%;
+        @include neonBtn($primary);
+    }
+}
+
+.outer-container.fade{
+    opacity:0;
+}
+.login-container{
+    margin: 5% auto;
+    padding: 3rem 2rem;
+    .login-btn{
+        width:45%;
+        transition: 0.3s;
+    }
+
+    @include mobile{
+        margin: 20% auto;
+    }
+    .login-btn:hover{
+        background-color: $primary;
+        transition: 0s;
+        border: 1px solid $primary !important;
+    }
+    input{
+        height:50px;
+        box-shadow: 0 0 5px white;
+    }
+
+
+}
+
+input{
+    display: block;
+    background-color: transparent !important;
+    caret-color: white;
+    color:white !important;
+    letter-spacing: 0.3rem;
+}
+
+
+
