@@ -5,11 +5,7 @@
         @navOpen="displayPage=false"
         @navClose="displayPage=true"></navbar>
     <alert-msg></alert-msg>
-    <div
-        class="content-container"
-        :class="containerSwitch">
-      <router-view></router-view>
-    </div>
+	<router-view class='content-container' :class="containerSwitch"></router-view>
     <Footer class="mt-10 footer" :class="footerSwitch"></Footer>
   </div>
 </template>

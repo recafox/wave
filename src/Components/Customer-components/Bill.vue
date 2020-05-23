@@ -2,7 +2,7 @@
 <!-- eslint-disable max-len -->
   <div class='container-fluid d-flex flex-column align-items-center'>
     <div class='col-sm-8 cart'>
-      <h3 class='text-white align-self-start ml-3 mt-5'>
+      <h3 class='title-primary align-self-start ml-3 m-top'>
         購物列表
       </h3>
         <table class='table table-borderless text-white mt-1'>

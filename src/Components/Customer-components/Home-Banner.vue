@@ -1,11 +1,13 @@
 <template >
 	<div class='banner_container'>
-		<div
-			class='glitch'
-			data-text='WAVE'>
-			WAVE
+		<div class='banner-content'>
+			<div
+				class='glitch'
+				data-text='WAVE'>
+				WAVE
+			</div>
+			<h1 class='text-white'>聲波唱片行</h1>
 		</div>
-		<h1 class='text-white'>聲波唱片行</h1>
 	</div>
 </template>
 
@@ -24,20 +26,26 @@ export default {
 @import '../../assets/all.scss';
 .banner_container{
 	position:absolute;
-	top:6%;
+	height:100vh;
 	left:50%;
+	top:0;
 	transform: translateX(-50%);
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	.banner-content{
+		position:absolute;
+		top:45%;
+		transform:translateY(-50%);
+		display:flex;
+		flex-direction: column;
+		align-items: center;
+	}
 	.glitch{
 		font-size: 7rem;
 		@include mobile{
 			font-size: 5rem;
 		}
-	}
-	@include mobile{
-		top:5%;
 	}
 	h2{
 		font-size: 2.5rem;

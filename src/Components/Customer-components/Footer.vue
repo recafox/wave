@@ -2,8 +2,14 @@
 	<div>
 		<div
 			class='footer-section p-4 d-flex flex-column align-items-end justify-content-start'>
-			<h2 class='text-white font-l'>WAVE</h2>
-			<h3 class='text-white'>聲波唱片</h3>
+			<div
+				class='glitch font-l'
+				data-text='聲波'>
+				聲波
+			</div>
+			<p class='text-white text-left'>
+				成立於2020年4月，聲波再遠都能傳到你耳邊。
+			</p>
 		</div>
 		<div class='footer-section p-4'>
 			<ul class='text-white font-m'>

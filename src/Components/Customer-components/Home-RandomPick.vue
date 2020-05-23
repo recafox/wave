@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <div>
-    <h3 class='title-neon text-center'>推薦給你</h3>
+    <h3 class='title-primary text-center mb-5'>推薦給你</h3>
     <carousel
       :perPage='1'
       :autoplay='false'
@@ -89,13 +89,10 @@ export default {
   display:flex;
   justify-content: space-evenly;
   img{
-    height:100%;
+    width:50%;
   }
   @include pad{
   align-items: center;
-  img{
-    @include sizing(350px);
-  }
   }
 
   @include mobile{

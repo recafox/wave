@@ -6,16 +6,17 @@
 };
 
 @mixin mobile-horizontal{
-    @media(max-width: 736px){
+    @media(min-width: 568px){
         @content;
     }
 }
 
 @mixin pad{
-    @media(max-width: 768px){
+    @media(min-width: 768px){
         @content;
     }
 }
+
 
 @mixin borderBtn($borderColor, $fontColor:$borderColor){
     border-radius: 0.25rem;

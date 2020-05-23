@@ -1,3 +1,7 @@
+.m-top{
+	margin-top: 80px;
+}
+
 .border-white{
     border:2px solid white;
 }
@@ -28,6 +32,9 @@
 
 .font-m{
     font-size: 1.5rem !important;
+}
+.font-r{
+	font-size: 1rem !important;
 }
 
 .font-s{
@@ -143,35 +150,35 @@
 }
 
 .text-line-through{
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .icon-l{
-    transform: scale(1.7);
+  transform: scale(1.7);
 }
 .icon-m{
-    transform: scale(1.3);
+  transform: scale(1.3);
 }
 
 .img-responsive{
-    @include sizing(150px);
-    @include mobile{
-        @include sizing(100px);
-    }
+	@include sizing(150px);
+	@include mobile{
+		@include sizing(100px);
+	}
 }
 
 .caret-white{
-    caret-color: white;
+	caret-color: white;
 }
 
 .btn-fixed-position-responsive{
-    @include pad{
-        top:75%;
-    }
-    @include mobile{
-        transform:scale(0.7);
-        top: 85%;
-    }
+	@include pad{
+			top:75%;
+	}
+	@include mobile{
+		transform:scale(0.7);
+		top: 85%;
+	}
 }
 
 .product-card{
@@ -182,7 +189,7 @@
 	align-items: center;
 	height:500px;
 	img{
-			width:60%;
+		width:60%;
 	}
 	&:hover{
 		background:rgba(255, 255, 255, 0.2);
@@ -192,9 +199,18 @@
 	}   
 }
 
-.title-neon{
+.title-primary{
 	font-family: 'Noto Sans TC';
 	font-size: 2rem;
-	text-shadow: 0 0 10px purple, 0 0 15px white;
-	color: violet;
+	text-shadow: 5px 3px 10px $primary;
+	color: white;
+	font-style: italic;
+}
+
+.title-secondary{
+	font-family: 'Noto Sans TC';
+	font-size: 2rem;
+	text-shadow: 0 0 5px $secondary, 0 0 5px white;
+	color: $secondary;
+	font-style: italic;	
 }

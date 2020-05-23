@@ -27,6 +27,7 @@
       <div
         class='mt-5 align-self-center col-sm-10 table-responsive'
         v-else>
+		<h3 class='title-primary mt-2'>購物車</h3>
         <table class='table table-borderless text-white mt-3'>
           <tbody>
             <tr
@@ -58,7 +59,7 @@
                 <router-link
                   :to='{name:"Custom_bill"}'>
                   <button class='btn-lg btn-border-warning'>
-                    結帳去
+                    結帳
                   </button>
                 </router-link>
               </td>

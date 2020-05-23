@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
   <div class='container-fluid d-flex flex-column align-items-center mt-4 p-3' v-if='order'>
-      <h3 class='text-white mb-2'>訂單資訊</h3>
+      <h3 class='title-primary mb-2'>訂單資訊</h3>
       <table class='col-sm-8 text-white table mb-4'>
         <tbody>
           <tr

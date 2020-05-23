@@ -1,7 +1,7 @@
 <template>
 <!-- eslint-disable max-len -->
 	<div class='container-fluid p-3 d-flex flex-column align-items-center'>
-		<h2 class='title-neon mt-10'>常見問答</h2>
+		<h2 class='title-primary m-top'>常見問答</h2>
 		<div class='col-sm-8 text-white mt-4'>
 			<h3>退換貨說明</h3>
 			<div class='p-2 text-container'>

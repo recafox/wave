@@ -18,10 +18,24 @@
     <div
       class='inner-container'
       :class='scrollingSwitch'>
-      <div class='mt-10 d-flex flex-column'>
-        <div class='d-md-flex flex-wrap justify-content-center mb-3'>
+			<div
+				class='flex-column text-center'>
+				<h3 class='title-primary text-center'>全部商品</h3>
+				<div
+					v-if='isSearching'
+					class='text-white mt-3 d-flex justify-content-center'>
+					<p class='ml-2'>{{ query }}</p>
+					<button
+					@click='cancelSearching'
+					class='btn-border-info ml-2'>
+					取消
+				</button>
+				</div>
+			</div>
+      <div class='mt-3 d-flex flex-column'>
+        <div class='mb-3 d-md-flex justify-content-center d-block'>
           <div
-            class='btn-neon-primary category-box'
+            class='btn-neon-primary category-box d-inline-block d-md-block'
             @click='cancelSearching'
             :class='{"active":query===""}'
             >
@@ -29,67 +43,23 @@
           </div>
           <div
             v-for='genre in genres'
-            :key='genre.title'
-            class='btn-neon-primary category-box'
-            @click='getQuery({query:genre.title})'
-            :class='{"active":query===genre.title}'>
+            :key='genre.value'
+            class='btn-neon-primary category-box d-inline-block d-md-block'
+            @click='getQuery({query:genre.value})'
+            :class='{"active":query===genre.value}'>
             <p>{{ genre.title }}</p>
           </div>
         </div>
-        <div
-          v-if='isSearching'
-          class='d-flex mb-2'>
-          <h5 class='text-white m-0'>
-            搜尋:{{ query }}
-          </h5>
-          <button
-            @click='cancelSearching'
-            class='btn-border-info ml-2'>
-            取消搜尋
-          </button>
-        </div>
-        <div class='align-self-center d-flex flex-wrap justify-content-center'>
+        <div class='row col-sm-12 align-self-center d-flex flex-wrap justify-content-center p-0'>
           <router-link
-          :to='{name:"Product_detail", params:{id:item.id}}'
+          :to='{name:"Product_detail", params:{id:product.id}}'
           class='text-white product-card m-lg-4 m-2 col-5 col-sm-2 position-relative'
-          v-for='item in products'
-          :key='item.title'>
-          <img
-            :src='item.imageUrl'
-            class='img-shadow'>
-          <div class='d-flex flex-column align-items-center p-1 mt-md-2 col-sm-10'>
-            <h5 class='mt-3 text-center'>
-              {{ item.title }}
-            </h5>
-            <h6 class='mt-2 text-center'>
-              {{ item.unit }}
-            </h6>
-            <p class='text-white text-centerr'>
-              {{ item.category }}
-            </p>
-            <p
-              class='text-line-through text-gray text-center mt-2'
-              v-if='item.price!==item.origin_price'>
-              $ {{ item.origin_price }}
-            </p>
-            <p class='font-m text-center mt-2'>
-              $ {{ item.price }}
-            </p>
-          </div>
-					<div class='d-flex flex-column flex-md-row position-absolute bottom-0 mb-3'>
-						<router-link
-							:to='{name:"Product_detail", params:{id:item.id}}'
-							class='m-2'>
-							<button class='btn btn-border-primary btn-lg'>
-								查看
-							</button>
-						</router-link>
-						<button
-							class='btn btn-border-success m-2 btn-lg'
-							@click.prevent='addToCart(item)'>
-							購買
-						</button>
-					</div>
+          v-for='product in products'
+          :key='product.title'>
+          <card
+						:product='product'
+						@buyProduct='addToCart'>
+					</card>
         </router-link>
         </div>
       </div>
@@ -100,23 +70,19 @@
         class='align-self-center'>
       </Pagination>
     </div>
-		<!-- <random-pick
-      v-if='randomPick'
-      :randomPick='randomPick'>
-    </random-pick> -->
   </div>
 </template>
 <script>
 import Searchbar from '../Search.vue';
 import Pagination from '../Pagination.vue';
-// import RandomPick from './Home-RandomPick.vue';
+import Card from './Product-card.vue';
 import Cart from './Cart.vue';
 
 export default {
   name: 'Custom-product',
   components: {
     Cart,
-    // RandomPick,
+    Card,
     Searchbar,
     Pagination,
   },
@@ -127,12 +93,12 @@ export default {
       allProducts: [],
       isAdding: false,
       genres: [
-        { value: 'Rock/搖滾', title: 'Rock/搖滾' },
-        { value: 'Pop/流行', title: 'Pop/流行' },
-        { value: 'Dance/舞曲', title: 'Dance/舞曲' },
-        { value: 'Country/鄉村', title: 'Country/鄉村' },
-        { value: 'Hip-Hop/嘻哈', title: 'Hip-Hop/嘻哈' },
-        { value: 'R&B/節奏藍調', title: 'R&B/節奏藍調' },
+        { value: 'Rock/搖滾', title: 'Rock / 搖滾' },
+        { value: 'Pop/流行', title: 'Pop / 流行' },
+        { value: 'Dance/舞曲', title: 'Dance / 舞曲' },
+        { value: 'Country/鄉村', title: 'Country / 鄉村' },
+        { value: 'Hip-Hop/嘻哈', title: 'Hip-Hop / 嘻哈' },
+        { value: 'R&B/節奏藍調', title: 'R&B / 節奏藍調' },
       ],
       sortModes: [
         { value: 'content', title: '發行日期' },
@@ -343,9 +309,8 @@ export default {
 
 .category-box{
   padding: 0.5rem 2rem;
-  margin: 0 1rem;
+  margin: 1rem;
   @include mobile{
-    display:inline-block;
     padding:0.5rem;
     margin:0.5rem;
   }
@@ -366,14 +331,7 @@ export default {
 }
 
 .product-card{
-  // width:calc(100% / 6);
   @include mobile{
-    // width:100%;
-    // flex-direction: row;
-    // justify-content: center;
-    // align-items:center;
-    // height:auto;
-    // padding: 0 2rem;
     img{
       width:90%;
     }

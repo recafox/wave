@@ -8,25 +8,24 @@
       ref='cart'>
     </cart>
     <div class='inner-container d-flex flex-column' :class='{"fade":displayPage===false}'>
-      <random-pick
-        :randomPick='randomPick'
-        v-if='randomPick'
-		@buyItem='addToCart'>
-      </random-pick>
+      <coupon class='mt-10'></coupon>
       <newest
         :newest='newest'
         v-if='newest'
 		@buyItem='addToCart'
-		class='align-self-center col-sm-10'>
+		class='align-self-center col-sm-12'>
       </newest>
+      <random-pick
+        :randomPick='randomPick'
+        v-if='randomPick'
+		@buyItem='addToCart'
+		class='mt-5'>
+      </random-pick>
       <new-item
-        class='mt-5'
+        class='mt-10'
         v-if='allProducts'
         :allProducts='allProducts'>
       </new-item>
-      <about
-        v-if='randomPick'>
-      </about>
     </div>
   </div>
 </template>
@@ -34,21 +33,21 @@
 <script>
 import $ from 'jquery';
 import Banner from './Home-Banner.vue';
+import Coupon from './Coupon.vue';
 import Cart from './Cart.vue';
 import RandomPick from './Home-RandomPick.vue';
 import Newest from './Home-Newest.vue';
 import NewItem from './Home-NewItem.vue';
-import About from './Home-About.vue';
 
 export default {
   name: 'Home',
   components: {
     Banner,
+    Coupon,
     Cart,
     RandomPick,
     Newest,
     NewItem,
-    About,
   },
   data() {
     return {
@@ -125,7 +124,7 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 @import '../../assets/all.scss';
 
 .inner-container{
