@@ -173,10 +173,9 @@
 
 .btn-fixed-position-responsive{
 	@include pad{
-			top:75%;
+		top:75%;
 	}
 	@include mobile{
-		transform:scale(0.7);
 		top: 85%;
 	}
 }
@@ -213,4 +212,33 @@
 	text-shadow: 0 0 5px $secondary, 0 0 5px white;
 	color: $secondary;
 	font-style: italic;	
+}
+
+.notice-btn{
+	@include sizing(100px);
+  color:$black;
+	background: $white;
+	font-size: 30px;
+	border-radius: 50%;
+	&:hover{
+    cursor: pointer;
+    background: $primary;
+    color:$white;
+	}
+	@include mobile{
+		transform: scale(0.8);
+	}
+	.notice-badge{
+		@include sizing(40px);
+		background:$danger;
+		font-size: 28px;
+		color:$white;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		position:absolute;
+		top:-10px;
+		right:-10px;
+		border-radius: 50%;
+	}
 }

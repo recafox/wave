@@ -8,9 +8,11 @@ import 'bootstrap';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
-  faSearch, faMinus, faPlus, faSignOutAlt, faShoppingCart, faArrowRight,
+  faSearch, faMinus, faPlus, faSignOutAlt, faShoppingCart, faArrowRight, faBell,
 } from '@fortawesome/free-solid-svg-icons';
-
+import {
+  faFacebookSquare, faInstagram, faTwitter, faGithub,
+} from '@fortawesome/free-brands-svg-icons';
 
 // --------Filter
 
@@ -26,7 +28,8 @@ import router from './router/index';
 import App from './App.vue';
 import './bus';
 
-library.add(faSearch, faSignOutAlt, faArrowRight, faShoppingCart, faMinus, faPlus);
+library.add(faSearch, faSignOutAlt, faArrowRight, faShoppingCart, faMinus, faPlus, faBell);
+library.add(faInstagram, faFacebookSquare, faTwitter, faGithub);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 Vue.filter('converseTime', timeFormat);
 

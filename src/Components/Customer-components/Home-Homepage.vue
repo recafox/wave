@@ -2,13 +2,12 @@
 <!-- eslint-disable max-len -->
   <div class='container-fluid pt-2'>
     <banner></banner>
-	<cart
+    <cart
       @cartOpen='displayPage = false'
       @cartClose='displayPage = true'
       ref='cart'>
     </cart>
     <div class='inner-container d-flex flex-column' :class='{"fade":displayPage===false}'>
-      <coupon class='mt-10'></coupon>
       <newest
         :newest='newest'
         v-if='newest'
@@ -33,7 +32,6 @@
 <script>
 import $ from 'jquery';
 import Banner from './Home-Banner.vue';
-import Coupon from './Coupon.vue';
 import Cart from './Cart.vue';
 import RandomPick from './Home-RandomPick.vue';
 import Newest from './Home-Newest.vue';
@@ -43,7 +41,6 @@ export default {
   name: 'Home',
   components: {
     Banner,
-    Coupon,
     Cart,
     RandomPick,
     Newest,
@@ -75,11 +72,17 @@ export default {
     },
     addToCart(item) {
       const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.$http.post(api, { data: { product_id: item.id, qty: 1 } }).then((response) => {
-        vm.$bus.$emit('message:push', response.data.message, 'info');
-        vm.$refs.cart.getCart();
-      });
+      const refCart = vm.$refs.cart;
+      let doubled = refCart.cart.filter((data) => data.product_id === item.id);
+      if (doubled.length > 0) {
+        vm.$bus.$emit('message:push', '購物車已經有這項物品', 'info');
+      } else {
+        const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+        vm.$http.post(api, { data: { product_id: item.id, qty: 1 } }).then((response) => {
+          vm.$bus.$emit('message:push', response.data.message, 'info');
+          refCart.getCart();
+        });
+      }
     },
     getProducts() {
       const vm = this;

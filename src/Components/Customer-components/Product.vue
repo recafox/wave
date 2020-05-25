@@ -298,6 +298,7 @@ export default {
     const vm = this;
     vm.getProductsAll();
     vm.getProductsWithPage();
+    console.log(vm.$router);
   },
 
 

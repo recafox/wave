@@ -4,6 +4,7 @@
     <navbar
         @navOpen="displayPage=false"
         @navClose="displayPage=true"></navbar>
+    <coupon></coupon>
     <alert-msg></alert-msg>
 	<router-view class='content-container' :class="containerSwitch"></router-view>
     <Footer class="mt-10 footer" :class="footerSwitch"></Footer>
@@ -12,7 +13,7 @@
 
 <script>
 import MyCanvas from '../Components/Canvas3.vue';
-
+import Coupon from '../Components/Coupon.vue';
 import Navbar from '../Components/Customer-components/Navbar.vue';
 import Footer from '../Components/Customer-components/Footer.vue';
 import AlertMsg from '../Components/AlertMsg.vue';
@@ -21,6 +22,7 @@ export default {
   name: 'Home',
   components: {
     AlertMsg,
+    Coupon,
     MyCanvas,
     Navbar,
     Footer,

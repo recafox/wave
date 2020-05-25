@@ -57,7 +57,7 @@
             @submit='sendBill'>
             <div class='row'>
               <div class='form-group col-sm-6'>
-                <label for='name'>姓名</label>
+                <label for='name'>姓名 <span class='font-s'>必填</span></label>
                 <validation-provider
                   rules="required"
                   v-slot="{ errors }">
@@ -73,7 +73,7 @@
                 </validation-provider>
               </div>
               <div class='form-group col-sm-6'>
-                  <label for='tel'>手機</label>
+                  <label for='tel'>手機 <span class='font-s'>必填</span></label>
                   <validation-provider
                     rules="numeric|required"
                     v-slot="{ errors }">
@@ -90,12 +90,17 @@
               </div>
             </div>
             <div class='form-group'>
-              <label for='address'>地址</label>
-                <div class='d-flex'>
+              <label for='address'>地址 <span class='font-s'>必填</span></label>
                   <validation-provider
                     rules="required"
-                    class='col-sm-6 pl-0 pr-0'>
-                    <select v-model='addressInput.city' class='form-control'>
+                    class='col-sm-12 pl-0 pr-0'>
+                    <select
+                      v-model='addressInput.city'
+                      class='form-control'
+                    >
+                      <option value='' selected>
+                        請選擇縣市
+                      </option>
                       <option
                         v-for='city in allCity'
                         :key='city.CityName'
@@ -104,18 +109,30 @@
                       </option>
                     </select>
                   </validation-provider>
+                <div class='form-group'>
                   <validation-provider
                     rules="required"
-                    class='col-sm-6 pr-0'>
+                    class='col-sm-12 pr-0'>
                     <select
                       v-model='addressInput.area'
                       v-if='addressInput.city'
-                      class='form-control'>
+                      class='form-control'
+                    >
+                      <option value='' selected>
+                        請選擇行政區
+                      </option>
                       <option
                         v-for='area in allCity.find(city => city.CityName === addressInput.city).AreaList'
                         :key='area.AreaName'
                         :value='area.AreaName'>
                         {{ area.AreaName }}
+                      </option>
+                    </select>
+                    <select
+                      v-else
+                      class='form-control'>
+                      <option value='' selected>
+                        請選擇行政區
                       </option>
                     </select>
                   </validation-provider>
@@ -124,7 +141,8 @@
                   type='text'
                   v-model='addressInput.place'
                   class='form-control caret-white text-white mt-2'
-                  required>
+                  required
+                  placeholder="請輸入地址">
             </div>
             <div class='form-group'>
               <validation-provider
@@ -132,6 +150,7 @@
                 v-slot='{ errors }'>
                 <label for='email'>
                   電子信箱
+                  <span class='font-s'>必填</span>
                 </label>
                 <input
                   type='text'
@@ -156,7 +175,8 @@
             <button
               type='submit'
               :disabled="invalid"
-              class='btn btn-lg btn-primary align-self-end'>
+              class='btn btn-lg btn-primary align-self-end'
+              style='cursor:not-allowed'>
               確認送出
             </button>
           </form>

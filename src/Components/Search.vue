@@ -4,7 +4,7 @@
     class='content bg-black search'
     :class='searchSwitch'>
     <div
-      class='search-btn d-flex justify-content-center btn-fixed-position-responsive'
+      class='search-btn notice-btn d-flex justify-content-center btn-fixed-position-responsive'
       @click='startSearch'>
       <span
         class='d-flex align-items-center '>
@@ -199,19 +199,9 @@ export default {
   transition:0.5s;
 
   .search-btn{
-    @include sizing(100px);
-    color:$black;
-    background: $white;
     position: absolute;
-    left:103%;
+    left:104%;
     top:80%;
-    font-size: 30px;
-    border-radius: 50%;
-    &:hover{
-      cursor: pointer;
-      background: $primary;
-      color:$white;
-    }
   }
 
   input{

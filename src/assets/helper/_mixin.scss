@@ -1,20 +1,26 @@
 
 @mixin mobile{
-    @media(max-width: 414px){
-        @content;
-    }
+	@media(max-width: 414px){
+		@content;
+	}
 };
 
 @mixin mobile-horizontal{
-    @media(min-width: 568px){
-        @content;
-    }
+	@media(min-width: 568px){
+		@content;
+	}
 }
 
 @mixin pad{
-    @media(min-width: 768px){
-        @content;
-    }
+	@media(min-width: 768px){
+		@content;
+	}
+}
+
+@mixin pc{
+	@media(min-width: 900px){
+		@content;
+	}
 }
 
 

@@ -3,15 +3,31 @@
   <div class='container-fluid d-flex flex-column align-items-center position-relative p-5'>
     <cart
       @cartOpen='displayPage = false'
-      @cartClose='displayPage = true'>
+      @cartClose='displayPage = true'
+      ref='cart'>
     </cart>
     <div class='item-bg'>
       <img :src='product.imageUrl'>
     </div>
     <div
-      class='col-sm-8 product-detail'
+      class='col-sm-8 product-detail m-5'
       :class='scrollingSwitch'>
-      <div class='row text-white position-relative'>
+      <div class='row text-white position-relative d-flex flex-column align-items-center'>
+        <div class='d-flex mb-5 w-100 text-white'>
+          <router-link
+            class='text-white'
+            :to='{name:"Homepage"}'>
+            首頁
+          </router-link>
+          <span class='ml-1 mr-1'>/</span>
+          <router-link
+            class='text-white'
+            :to='{name:"Custom_products"}'>
+            全部商品
+          </router-link>
+          <span class='ml-1 mr-1'>/</span>
+          <p>{{ product.unit }} - {{ product.title }}</p>
+        </div>
         <img
           :src='product.imageUrl'
           class='img-shadow mb-3 p-0'>
@@ -33,46 +49,38 @@
           <p class='font-m mt-3'>
             $ {{ product.price }}
           </p>
-          <div class='d-flex align-items-center mt-3 w-100 justify-content-end'>
-            <button
-              class='btn btn-border-warning mr-1'
-              @click='qty-=1'>
-              <font-awesome-icon icon='minus'/>
-            </button>
-            <input
-              class='border border-warning text-center h-100 rounded pt-2 pb-2 text-white'
-              type='number'
-              v-model='qty'
-              disabled
-              style='width:50px'>
-            <button
-              class='btn btn-border-warning ml-1 mr-3'
-              @click='qty+=1'>
-              <font-awesome-icon icon='plus'/>
-            </button>
-            <button
-              class='btn-neon-warning buy-btn'
-              @click='addToCart'>
-              購買
-            </button>
+          <div class='d-flex'>
+            <qty-controller
+              class='mt-2'
+              :product='product'
+              @updateQTY='updateQTY'
+            >
+              <button
+                class='btn-neon-warning buy-btn h-100'
+                @click='addToCart'>
+                購買
+              </button>
+            </qty-controller>
           </div>
         </div>
       </div>
       <div
-        class='row col-12 text-white mt-5'
+        class='row col-12 text-white mt-5 d-flex flex-column'
         style='white-space:pre-line'>
+        <h3 class='title-primary mb-2'>
+          曲目表
+        </h3>
         <p>
           {{product.description}}
         </p>
-      </div>
-      <div
-        class='mt-5 col-12'
-        v-if='alikes.length>0'>
         <h3
-          class='text-white mb-4 text-center'>
+          class='title-primary mb-4 text-left mt-5'
+          v-if='alikes.length >0'>
           類似商品
         </h3>
-        <div>
+        <div
+          v-if='alikes.length >0'
+          class='d-flex'>
           <div
             v-for='item in alikes'
             :key='item.title'
@@ -92,29 +100,21 @@
 
 <script>
 import Cart from './Cart.vue';
+import qtyController from './QTY-Controller.vue';
 
 export default {
   name: 'Product_detail',
   components: {
     Cart,
+    qtyController,
   },
   data() {
     return {
       product: {},
-      qty: 1,
       alikes: [],
       displayPage: true,
+      qty: 1,
     };
-  },
-  watch: {
-    qty: {
-      handler(newVal) {
-        const vm = this;
-        if (newVal <= 1) {
-          vm.qty = 1;
-        }
-      },
-    },
   },
   computed: {
     scrollingSwitch() {
@@ -131,12 +131,23 @@ export default {
     next();
   },
   methods: {
+    updateQTY(num) {
+      const vm = this;
+      vm.qty = num;
+    },
     addToCart() {
       const vm = this;
-      const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
-      vm.$http.post(api, { data: { product_id: vm.product.id, qty: vm.qty } }).then((response) => {
-        vm.$bus.$emit('message:push', response.data.message, 'info');
-      });
+      const refCart = vm.$refs.cart;
+      let doubled = refCart.cart.filter((data) => data.product_id === vm.product.id);
+      if (doubled.length > 0) {
+        vm.$bus.$emit('message:push', '購物車已經有這項物品', 'info');
+      } else {
+        const api = `${process.env.VUE_APP_APIPATH}api/${process.env.VUE_APP_CUSTOMPATH}/cart`;
+        vm.$http.post(api, { data: { product_id: vm.product.id, qty: vm.qty } }).then((response) => {
+          vm.$bus.$emit('message:push', response.data.message, 'info');
+          refCart.getCart();
+        });
+      }
     },
     getAlikes() {
       const vm = this;
@@ -176,13 +187,6 @@ export default {
 .container-fluid{
   @include mobile{
     overflow-x: hidden;
-  }
-  .buy-btn{
-    border-radius: 0.375rem;
-    height:38px;
-    letter-spacing: 0.3rem;
-    text-indent: 0.3rem;
-    font-size: 20px;
   }
 }
 .product-detail{

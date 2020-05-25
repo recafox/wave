@@ -47,13 +47,13 @@
                 <h5>金額</h5>
               </th>
               <th
-                class='text-center align-middle p-2 text-white'
-                width='80'>
+                class='text-left align-middle p-2 text-white'
+                >
                 <h5>顧客資訊</h5>
               </th>
               <th
                 class='text-center align-middle p-2 text-white'
-                width='80'>
+                >
               </th>
             </tr>
           </thead>
@@ -263,7 +263,8 @@
                             v-model='tempOrder.user.tel'
                             required>
                         </div>
-                      </div>                                     <div class='col-sm-6'>
+                      </div>
+                      <div class='col-sm-6'>
                         <div>
                           信箱
                           <p

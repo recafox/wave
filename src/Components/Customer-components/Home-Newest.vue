@@ -2,7 +2,7 @@
 <!-- eslint-disable max-len -->
 	<div style='margin-top:200px' class='row d-flex flex-md-row flex-sm-column'>
     <div class='col-sm-4 d-md-flex flex-column'>
-      <h3 class='title-primary text-right mb-3'>最新發行</h3>
+      <h3 class='title-primary text-right'>最新發行</h3>
       <router-link
         :to='{name:"Product_detail", params:{ id:item.id }}'
         v-for='item in newest.slice(0,1)'
@@ -45,11 +45,6 @@
             <font-awesome-icon icon='plus' class='ml-2'/>
           </button>
         </div>
-        <router-link
-          :to='{name:"Custom_products"}'
-          class='btn-neon-info mt-4 btn mr-2 position-absolute bottom-0 mb-3 w-75'>
-          看更多商品
-        </router-link>
       </router-link>
     </div>
     <h4 class='title-primary font-m d-sm-none mr-5 mb-4 font-italic'>右滑看更多</h4>

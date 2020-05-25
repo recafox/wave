@@ -4,7 +4,7 @@
     <h3 class='title-primary text-center mb-5'>推薦給你</h3>
     <carousel
       :perPage='1'
-      :autoplay='false'
+      :autoplay='true'
       :autoplayTimeout='2000'
       paginationActiveColor="#D537E1"
       paginationColor="#6c757d">

@@ -25,9 +25,10 @@
               <p>
                 總價: {{ parseInt(item.final_total) }} 元
               </p>
-              <p>
+              <p
                 v-if='item.coupon'
                 class='text-info font-s'>
+              >
                 已套用優惠: {{ item.coupon.code }}
               </p>
             </td>
@@ -38,9 +39,11 @@
           </tr>
         </tbody>
       </table>
-      <h5 class='text-white text-center mb-2'>留言</h5>
-      <div class='col-sm-8 rounded border border-white text-white p-2 mb-4'>
-        <p>{{ order.message }}</p>
+      <div v-if='order.message'>
+        <h5 class='text-white text-center mb-2'>留言</h5>
+        <div class='col-sm-8 rounded border border-white text-white p-2 mb-4'>
+          <p>{{ order.message }}</p>
+        </div>
       </div>
       <h5 class='text-white text-center mb-2'>顧客資訊</h5>
       <table class='col-sm-8 text-white table mb-4'>
@@ -69,11 +72,11 @@
         確認付款
       </button>
       <router-link to='/'>
-        <button
-          class='btn btn-lg btn-success'
-          v-if='billPaid'>
-          返回首頁
-        </button>
+      <button
+        class='btn btn-lg btn-success'
+        v-if='billPaid'>
+        返回首頁
+      </button>
       </router-link>
 
   </div>

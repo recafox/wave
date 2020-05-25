@@ -1,10 +1,10 @@
-<template lang="">
+<template>
   <div
     class='content bg-black cart'
     :class='cartSwitch'>
     <div
-      class='cart-btn d-flex justify-content-center btn-fixed-position-responsive'>
-      <div class='cart-badge'>
+      class='cart-btn notice-btn d-flex justify-content-center btn-fixed-position-responsive'>
+      <div class='notice-badge'>
 		{{ cart.length }}
       </div>
       <span
@@ -39,7 +39,7 @@
               <td class='align-middle border-bottom'>
                 <p>{{ item.product.title }}</p>
                 <p>$ {{ item.product.price }}</p>
-                <p>數量: {{ item.qty }} 個</p>
+                <p>共 {{item.qty }} 個</p>
                 <p>總價: $ {{ item.total }}</p>
               </td>
               <td class='border-bottom align-middle text-center'>
@@ -72,6 +72,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Cart',
   data() {
@@ -142,43 +143,21 @@ export default {
     transform: translateX(100%);
     transition:0.5s;
     table img{
-        height:150px;
-        @include mobile{
-            height:100px;
-        }
+      height:150px;
+      @include mobile{
+        height:100px;
+      }
     }
  }
  .cart.show{
-     transform: translateX(0);
-     overflow-y: scroll;
+  transform: translateX(0);
+  overflow-y: scroll;
  }
 
  .cart-btn{
-  @include sizing(100px);
-  color:$black;
-  background: $white;
   position: absolute;
   left:calc(-4% - 100px);
   top:80%;
-  font-size: 30px;
   border-radius: 50%;
-  &:hover{
-    cursor: pointer;
-    background: $primary;
-    color:$white;
-  }
-  .cart-badge{
-    @include sizing(40px);
-    background:$danger;
-    font-size: 28px;
-    color:$white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position:absolute;
-    top:-10px;
-    right:-10px;
-    border-radius: 50%;
-  }
 }
 </style>
