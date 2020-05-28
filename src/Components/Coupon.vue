@@ -1,7 +1,7 @@
 <template>
 	<div class='coupon-content d-flex flex-column justify-content-center align-items-center' :class='{"fadeIn":fadeIn}'>
       <h2 class='title-primary font-l mb-3'>慶祝開幕！</h2>
-      <p class="text-white font-m">
+      <p class="text-white font-m p-3">
         結帳時輸入<span class='title-primary'>WAVEBIRTHDAY</span>，可享九折優惠！
       </p>
       <button
@@ -36,15 +36,18 @@ export default {
   width:100vw;
   height:100vh;
   position: fixed;
-  z-index: 10;
+  z-index:100;
   top:0;
   left:0;
   transform:translateX(100%);
   transition: 0.5s;
   .notice-btn{
     position:absolute;
-    top:15%;
+    top:10%;
     left:calc(-5% - 100px);
+    @include pad {
+      left: calc(-4% - 100px);
+    }
   }
 }
 

@@ -4,7 +4,7 @@
     <navbar
         @navOpen="displayPage=false"
         @navClose="displayPage=true"></navbar>
-    <coupon></coupon>
+    <coupon v-if='displayPage'></coupon>
     <alert-msg></alert-msg>
 	<router-view class='content-container' :class="containerSwitch"></router-view>
     <Footer class="mt-10 footer" :class="footerSwitch"></Footer>

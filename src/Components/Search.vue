@@ -73,7 +73,8 @@
                   value='ascend'
                   id='ascend'
                   name='sortType'
-                  class='d-inline-block ml-2'>
+                  class='d-inline-block ml-2'
+                  >
                 <label for='ascend'>低至高</label>
                 <input
                   v-model='sortType'
@@ -110,8 +111,8 @@ export default {
   data() {
     return {
       query: '',
-      sortType: '' || undefined,
-      sortMode: '' || undefined,
+      sortType: undefined,
+      sortMode: undefined,
       showSearch: false,
     };
   },
@@ -123,7 +124,23 @@ export default {
         sortType: vm.sortType,
         sortMode: vm.sortMode,
       };
-      vm.$emit('sendQuery', query);
+      if (query.query.length !== 0) {
+        if (query.sortType === undefined && query.sortMode === undefined) {
+          vm.$emit('sendQuery', query);
+        } else if (query.sortType && query.sortMode) {
+          vm.$emit('sendQuery', query);
+        } else {
+          vm.$bus.$emit('message:push', '請設定排序模式', 'warning');
+        }
+      } else if (query.query.length === 0) {
+        if (query.sortType === undefined && query.sortMode === undefined) {
+          vm.$bus.$emit('message:push', '請設定排序模式或輸入搜索詞', 'warning');
+        } else if (query.sortType && query.sortMode) {
+          vm.$emit('sendQuery', query);
+        } else {
+          vm.$bus.$emit('message:push', '請設定排序模式', 'warning');
+        }
+      }
     },
     toggleCheck(mode, property, className) {
       const vm = this;
@@ -133,7 +150,7 @@ export default {
           vm[property] = mode.value;
           b.classList.add('active');
         } else if (b.innerText === mode.title && b.classList.contains('active')) {
-          vm[property] = '';
+          vm[property] = undefined;
           b.classList.remove('active');
         } else if (b.innerText !== mode.title && b.classList.contains('active')) {
           b.classList.remove('active');
@@ -148,8 +165,8 @@ export default {
     clear() {
       const vm = this;
       vm.query = '';
-      vm.sortType = '';
-      vm.sortMode = '';
+      vm.sortType = undefined;
+      vm.sortMode = undefined;
       const modes = document.querySelectorAll('.mode');
       const boxes = document.querySelectorAll('.section__box');
       function clearActive(nodeGroup) {
@@ -194,7 +211,7 @@ export default {
   position:fixed;
   top:0;
   left:0;
-  z-index:10;
+  z-index:1000;
   transform: translateX(-100%);
   transition:0.5s;
 

@@ -139,7 +139,7 @@ export default {
     position:fixed;
     top:0;
     left:0;
-    z-index:10;
+    z-index:100;
     transform: translateX(100%);
     transition:0.5s;
     table img{

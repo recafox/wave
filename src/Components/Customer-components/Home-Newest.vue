@@ -55,7 +55,7 @@
 						v-for='product in newest.slice(0,3)'
 						:key='product.title'
 						:to='{name:"Product_detail", params:{ id:product.id }}'
-						class='product-card mb-4 col-3 position-relative'>
+						class='mb-4 col-4 col-sm-4 position-relative'>
 						<card
 							:product='product'
 							@buyProduct='buyItem'>
@@ -67,7 +67,7 @@
 						:to='{name:"Product_detail", params:{ id:product.id }}'
 						v-for='product in newest.slice(3,6)'
 						:key='product.title'
-						class='product-card mb-4 col-3 position-relative'>
+						class='mb-4 col-4 col-sm-4 position-relative'>
 						<card
 							:product='product'
 							@buyProduct='buyItem'>
@@ -114,32 +114,34 @@ export default {
 		margin-bottom:2rem;
 	}
 }
-.outer-scroll{
-	overflow-y: hidden;
-	overflow-x: scroll;
-	height:600px;
-	.inner-scroll{
-		width:1500px;
-		display:flex;
-	}
-	.inner-item{
-		width:50%;
-		justify-content: space-evenly;
-	}
-	@include pad{
-		height:auto;
-		overflow-x: initial;
-		overflow-y: initial;
-		.inner-scroll{
-			width:unset;
-			flex-direction: column;
-			align-items: center;
-			.inner-item{
-				width:100%;
-				margin:0.5rem 0;
-			}
-		}
-	}
+
+.outer-scroll {
+  height:auto;
+  overflow-x: initial;
+  overflow-y: initial;
+  .inner-scroll{
+    width:unset;
+    flex-direction: column;
+    align-items: center;
+  .inner-item{
+    width:100%;
+    margin:0.5rem 0;
+    }
+  }
+  @include mobile {
+    overflow-y: hidden;
+    overflow-x: scroll;
+    height:600px;
+    .inner-scroll{
+      width:1500px;
+      display:flex;
+      flex-direction: row;
+    }
+    .inner-item{
+      width:50%;
+      justify-content: space-evenly;
+    }
+  }
 }
 
 </style>

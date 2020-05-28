@@ -33,9 +33,9 @@
 				</div>
 			</div>
       <div class='mt-3 d-flex flex-column'>
-        <div class='mb-3 d-md-flex justify-content-center d-block'>
+        <div class='mb-3 col-12 category-box-group'>
           <div
-            class='btn-neon-primary category-box d-inline-block d-md-block'
+            class='btn-neon-primary box'
             @click='cancelSearching'
             :class='{"active":query===""}'
             >
@@ -44,7 +44,7 @@
           <div
             v-for='genre in genres'
             :key='genre.value'
-            class='btn-neon-primary category-box d-inline-block d-md-block'
+            class='btn-neon-primary box'
             @click='getQuery({query:genre.value})'
             :class='{"active":query===genre.value}'>
             <p>{{ genre.title }}</p>
@@ -53,7 +53,7 @@
         <div class='row col-sm-12 align-self-center d-flex flex-wrap justify-content-center p-0'>
           <router-link
           :to='{name:"Product_detail", params:{id:product.id}}'
-          class='text-white product-card m-lg-4 m-2 col-5 col-sm-2 position-relative'
+          class='text-white col-sm-2 m-sm-3 mb-2 col-6 position-relative'
           v-for='product in products'
           :key='product.title'>
           <card
@@ -67,7 +67,7 @@
         v-if='!isSearching'
         :pagination = pagination
         @turnTo='changePage'
-        class='align-self-center'>
+        class='align-self-center mt-5'>
       </Pagination>
     </div>
   </div>
@@ -233,41 +233,55 @@ export default {
                 vm.isSearching = true;
                 vm.query = q.query;
                 break;
-              case q.sortMode.length === 0 && q.sortType.length === 0:
-                vm.products = filtered;
-                vm.isSearching = true;
-                vm.query = q.query;
-                break;
               default:
+                vm.$bus.$emit('message:push', '發生錯誤', 'warning');
                 vm.cancelSearching();
                 break;
             }
 
             break;
           case q.query.length === 0:
-            switch (true) {
-              case q.sortMode.length > 0 && q.sortType.length > 0:
-                if (q.sortType === 'ascend') {
-                  type = '低至高';
-                } else if (q.sortType === 'descend') {
-                  type = '高至低';
-                }
-                vm.sortModes.forEach((m) => {
-                  if (m.value === q.sortMode) {
-                    mode = m.title;
-                    sorted = vm.sortBy(valueList, m.value, q.sortType);
-                  }
-                });
-                vm.products = sorted;
-                vm.query = `${mode}/${type}`;
-                vm.isSearching = true;
-                break;
-              default:
-                vm.cancelSearching();
-                break;
+            if (q.sortType === 'ascend') {
+              type = '低至高';
+            } else if (q.sortType === 'descend') {
+              type = '高至低';
             }
-
+            vm.sortModes.forEach((m) => {
+              if (m.value === q.sortMode) {
+                mode = m.title;
+                sorted = vm.sortBy(valueList, m.value, q.sortType);
+              }
+            });
+            vm.products = sorted;
+            vm.query = `${mode}/${type}`;
+            vm.isSearching = true;
             break;
+            // switch (true) {
+            //   case q.sortMode !== undefined && q.sortType !== undefined:
+            //     if (q.sortType === 'ascend') {
+            //       type = '低至高';
+            //     } else if (q.sortType === 'descend') {
+            //       type = '高至低';
+            //     }
+            //     vm.sortModes.forEach((m) => {
+            //       if (m.value === q.sortMode) {
+            //         mode = m.title;
+            //         sorted = vm.sortBy(valueList, m.value, q.sortType);
+            //       }
+            //     });
+            //     vm.products = sorted;
+            //     vm.query = `${mode}/${type}`;
+            //     vm.isSearching = true;
+            //     break;
+            //   case q.sortMode === undefined || q.sortType === undefined:
+            //     vm.$bus.$emit('message:push', '請設定排序模式或輸入搜索詞', 'warning');
+            //     break;
+            //   default:
+            //     vm.$bus.$emit('message:push', '請設定排序模式或輸入搜索詞', 'warning');
+            //     vm.cancelSearching();
+            //     break;
+            // }
+            // break;
           default:
             break;
         }
@@ -298,7 +312,6 @@ export default {
     const vm = this;
     vm.getProductsAll();
     vm.getProductsWithPage();
-    console.log(vm.$router);
   },
 
 
@@ -308,12 +321,16 @@ export default {
 <style lang="scss" scoped>
 @import '../../assets/all.scss';
 
-.category-box{
-  padding: 0.5rem 2rem;
-  margin: 1rem;
-  @include mobile{
-    padding:0.5rem;
-    margin:0.5rem;
+.category-box-group {
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  .box {
+    padding: 0.5rem 0.7rem;
+    margin: 0.5rem;
+  }
+  @include mobile {
+    display: block;
   }
 }
 .inner-container{
@@ -331,11 +348,4 @@ export default {
   display:none !important;
 }
 
-.product-card{
-  @include mobile{
-    img{
-      width:90%;
-    }
-  }
-}
 </style>

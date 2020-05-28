@@ -479,7 +479,7 @@ export default {
           case q.query.length > 0:
             filtered = vm.filterBy(valueList, q.query);
             switch (true) {
-              case q.sortMode.length > 0 && q.sortType.length > 0:
+              case q.sortMode !== undefined && q.sortType !== undefined:
                 if (q.sortType === 'ascend') {
                   type = '低至高';
                 } else if (q.sortType === 'descend') {
@@ -494,7 +494,7 @@ export default {
                 vm.coupons = sorted;
                 vm.query = `${q.query}/${mode}/${type}`;
                 break;
-              case q.sortMode.length === 0 && q.sortType.length === 0:
+              case q.sortMode === undefined && q.sortType === undefined:
                 vm.coupons = filtered;
                 vm.query = `${q.query}`;
                 break;
@@ -504,27 +504,19 @@ export default {
             }
             break;
           case q.query.length <= 0:
-            switch (true) {
-              case q.sortMode.length > 0 && q.sortType.length > 0:
-                if (q.sortType === 'ascend') {
-                  type = '低至高';
-                } else if (q.sortType === 'descend') {
-                  type = '高至低';
-                }
-                vm.sortModes.forEach((m) => {
-                  if (m.value === q.sortMode) {
-                    mode = m.title;
-                    sorted = vm.sortBy(valueList, m.value, q.sortType);
-                  }
-                });
-                vm.coupons = sorted;
-                vm.query = `${mode}/${type}`;
-                break;
-              default:
-                vm.cancelSearching();
-                break;
+            if (q.sortType === 'ascend') {
+              type = '低至高';
+            } else if (q.sortType === 'descend') {
+              type = '高至低';
             }
-
+            vm.sortModes.forEach((m) => {
+              if (m.value === q.sortMode) {
+                mode = m.title;
+                sorted = vm.sortBy(valueList, m.value, q.sortType);
+              }
+            });
+            vm.coupons = sorted;
+            vm.query = `${mode}/${type}`;
             break;
           default:
             break;

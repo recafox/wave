@@ -132,6 +132,9 @@
 		&:hover{
 			animation:wobble 1.5s ease-in infinite;
 		}
+		@include mobile{
+			box-shadow: -7px 4px 2px rgba(50, 193, 139,0.6),-5px -3px 2px rgba(213, 55, 225,0.6) ;
+		}
 }
 .img-shadow.active{
 	animation:wobble 1.5s ease-in infinite;
@@ -188,14 +191,30 @@
 	align-items: center;
 	height:500px;
 	img{
-		width:60%;
+		width: 70%;
 	}
 	&:hover{
 		background:rgba(255, 255, 255, 0.2);
 		.img-shadow{
 			animation:wobble 1.5s ease-in-out infinite;
 		}
-	}   
+	} 
+	
+	.product__linkgroup {
+		display:flex;
+		justify-content: center;
+		align-items: center;
+		position: absolute;
+		bottom: 0;
+		margin-bottom: 1rem;
+		.product__linkgroup__link {
+			margin:0.3rem 0.2rem;
+		}
+		@include pad{
+			flex-direction: column;
+			margin:0.3rem 0;
+		}
+	}
 }
 
 .title-primary{
@@ -226,7 +245,7 @@
     color:$white;
 	}
 	@include mobile{
-		transform: scale(0.8);
+		transform: scale(0.8) !important;
 	}
 	.notice-badge{
 		@include sizing(40px);
