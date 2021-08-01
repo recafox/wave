@@ -117,7 +117,8 @@ export default {
     };
   },
   methods: {
-    sendQuery() {
+    sendQuery(event) {
+      event.preventDefault();
       const vm = this;
       const query = {
         query: vm.query,

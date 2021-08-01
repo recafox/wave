@@ -43,7 +43,7 @@ export default {
   transition: 0.5s;
   .notice-btn{
     position:absolute;
-    top:10%;
+    top:15%;
     left:calc(-5% - 100px);
     @include pad {
       left: calc(-4% - 100px);

@@ -256,32 +256,6 @@ export default {
             vm.query = `${mode}/${type}`;
             vm.isSearching = true;
             break;
-            // switch (true) {
-            //   case q.sortMode !== undefined && q.sortType !== undefined:
-            //     if (q.sortType === 'ascend') {
-            //       type = '低至高';
-            //     } else if (q.sortType === 'descend') {
-            //       type = '高至低';
-            //     }
-            //     vm.sortModes.forEach((m) => {
-            //       if (m.value === q.sortMode) {
-            //         mode = m.title;
-            //         sorted = vm.sortBy(valueList, m.value, q.sortType);
-            //       }
-            //     });
-            //     vm.products = sorted;
-            //     vm.query = `${mode}/${type}`;
-            //     vm.isSearching = true;
-            //     break;
-            //   case q.sortMode === undefined || q.sortType === undefined:
-            //     vm.$bus.$emit('message:push', '請設定排序模式或輸入搜索詞', 'warning');
-            //     break;
-            //   default:
-            //     vm.$bus.$emit('message:push', '請設定排序模式或輸入搜索詞', 'warning');
-            //     vm.cancelSearching();
-            //     break;
-            // }
-            // break;
           default:
             break;
         }

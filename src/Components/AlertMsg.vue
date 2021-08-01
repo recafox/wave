@@ -74,7 +74,6 @@ export default {
               vm.messages.splice(i, 1);
             }
           });
-          console.log('msg deleted');
         }, 500);
       });
     },
